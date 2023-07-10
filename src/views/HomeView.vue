@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue';
+import ImageGallery from '@/components/ImageGallery.vue';
 </script>
 
 <template>
-  <HelloWorld />
+  <ImageGallery />
 </template>
