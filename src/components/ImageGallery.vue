@@ -25,8 +25,8 @@ const cards = [
     <v-main>
       <v-container fluid class="w-75">
         <v-row>
-          <v-col v-for="card in cards" :key="card.title">
-            <v-card style="width: 20em">
+          <v-col v-for="card in cards" :key="card.title" sm="6" md="6" lg="3">
+            <v-card>
               <v-img
                 :src="card.src"
                 class="align-end"
