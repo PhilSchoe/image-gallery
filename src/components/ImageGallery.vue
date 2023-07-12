@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import AddImageCard from './AddImageCard.vue';
+
 const cards = [
   { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
   { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
@@ -34,7 +36,7 @@ const cards = [
                 aspect-ratio="1"
                 cover
               >
-                <v-card-title class="text-white" v-text="card.title"></v-card-title>
+                <v-card-title class="text-white">{{ card.title }}</v-card-title>
               </v-img>
 
               <v-card-actions>
@@ -57,6 +59,9 @@ const cards = [
                 ></v-btn>
               </v-card-actions>
             </v-card>
+          </v-col>
+          <v-col sm="6" md="6" lg="3">
+            <add-image-card />
           </v-col>
         </v-row>
       </v-container>
