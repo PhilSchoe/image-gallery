@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import ContentCard from './ContentCard.vue';
 import AddImageCard from './AddImageCard.vue';
 
 const cards = [
@@ -28,37 +29,7 @@ const cards = [
       <v-container fluid class="w-75">
         <v-row>
           <v-col v-for="card in cards" :key="card.title" sm="6" md="6" lg="3">
-            <v-card>
-              <v-img
-                :src="card.src"
-                class="align-end"
-                gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
-                aspect-ratio="1"
-                cover
-              >
-                <v-card-title class="text-white">{{ card.title }}</v-card-title>
-              </v-img>
-
-              <v-card-actions>
-                <v-spacer></v-spacer>
-
-                <v-btn size="small" color="surface-variant" variant="text" icon="mdi-heart"></v-btn>
-
-                <v-btn
-                  size="small"
-                  color="surface-variant"
-                  variant="text"
-                  icon="mdi-bookmark"
-                ></v-btn>
-
-                <v-btn
-                  size="small"
-                  color="surface-variant"
-                  variant="text"
-                  icon="mdi-share-variant"
-                ></v-btn>
-              </v-card-actions>
-            </v-card>
+            <content-card :card-title="card.title" :card-image-src="card.src" />
           </v-col>
           <v-col sm="6" md="6" lg="3">
             <add-image-card />
