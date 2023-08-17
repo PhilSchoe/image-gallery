@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ContentCard from './ContentCard.vue';
-import AddImageCard from './AddImageCard.vue';
 
 const cards = [
   { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
@@ -14,9 +13,13 @@ const cards = [
 <template>
   <v-app>
     <v-app-bar app>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-tooltip text="Upload Image" location="bottom">
+        <template #activator="{ props }">
+          <v-btn v-bind="props" icon="mdi-image-plus"></v-btn>
+        </template>
+      </v-tooltip>
 
-      <v-toolbar-title>Image Gallery</v-toolbar-title>
+      <div style="font-size: x-large; padding-left: 0.5 em">Image Gallery</div>
 
       <v-spacer></v-spacer>
 
@@ -30,9 +33,6 @@ const cards = [
         <v-row>
           <v-col v-for="card in cards" :key="card.title" sm="6" md="6" lg="3">
             <content-card :card-title="card.title" :card-image-src="card.src" />
-          </v-col>
-          <v-col sm="6" md="6" lg="3">
-            <add-image-card />
           </v-col>
         </v-row>
       </v-container>
