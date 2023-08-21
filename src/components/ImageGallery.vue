@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import ContentCard from './ContentCard.vue';
+import GenericDialog from './GenericDialog.vue';
+import ImageUpload from './ImageUpload.vue';
 
 const cards = [
   { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
@@ -13,11 +15,9 @@ const cards = [
 <template>
   <v-app>
     <v-app-bar app>
-      <v-tooltip text="Upload Image" location="bottom">
-        <template #activator="{ props }">
-          <v-btn v-bind="props" icon="mdi-image-plus"></v-btn>
-        </template>
-      </v-tooltip>
+      <generic-dialog>
+        <image-upload />
+      </generic-dialog>
 
       <div style="font-size: x-large; padding-left: 0.5 em">Image Gallery</div>
 
