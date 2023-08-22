@@ -1,4 +1,8 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+defineProps<{
+  closeDialogFunction: () => void;
+}>();
+</script>
 
 <template>
   <v-card>
@@ -10,7 +14,7 @@
     </v-card-text>
     <v-card-actions>
       <v-spacer />
-      <v-btn variant="text">Close</v-btn>
+      <v-btn @click="closeDialogFunction" variant="text">Close</v-btn>
       <v-btn variant="text">Upload</v-btn>
     </v-card-actions>
   </v-card>

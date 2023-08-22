@@ -1,9 +1,15 @@
 <script setup lang="ts">
-import { mergeProps } from 'vue';
+import { mergeProps, ref } from 'vue';
+
+const show = ref<boolean>(false);
+
+function closeDialog() {
+  show.value = false;
+}
 </script>
 
 <template>
-  <v-dialog width="50%" overlay-color="black" overlay-opacity="1">
+  <v-dialog v-model="show" width="50%" overlay-color="black" overlay-opacity="1">
     <template v-slot:activator="{ props: dialog }">
       <v-tooltip text="Upload Image" location="bottom">
         <template v-slot:activator="{ props: tooltip }">
@@ -11,7 +17,7 @@ import { mergeProps } from 'vue';
         </template>
       </v-tooltip>
     </template>
-    <slot>
+    <slot :closeDialogFunction="closeDialog">
       <h1>Fallback Content</h1>
     </slot>
   </v-dialog>

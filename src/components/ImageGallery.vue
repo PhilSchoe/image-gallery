@@ -16,7 +16,9 @@ const cards = [
   <v-app>
     <v-app-bar app>
       <generic-dialog>
-        <image-upload />
+        <template #default="{ closeDialogFunction }">
+          <image-upload :close-dialog-function="closeDialogFunction" />
+        </template>
       </generic-dialog>
 
       <div style="font-size: x-large; padding-left: 0.5 em">Image Gallery</div>
