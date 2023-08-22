@@ -9,7 +9,7 @@ function closeDialog() {
 </script>
 
 <template>
-  <v-dialog v-model="show" width="50%" overlay-color="black" overlay-opacity="1">
+  <v-dialog v-model="show" width="50%">
     <template v-slot:activator="{ props: dialog }">
       <v-tooltip text="Upload Image" location="bottom">
         <template v-slot:activator="{ props: tooltip }">
