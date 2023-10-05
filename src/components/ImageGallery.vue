@@ -15,7 +15,7 @@ const cards = [
 <template>
   <v-app>
     <v-app-bar app>
-      <generic-dialog>
+      <generic-dialog open-button-tooltip="Image Upload" icon="mdi-image-plus">
         <template #default="{ closeDialogFunction }">
           <image-upload :close-dialog-function="closeDialogFunction" />
         </template>
