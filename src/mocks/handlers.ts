@@ -1,4 +1,5 @@
 import { rest } from 'msw';
+import { type Image } from '@/types/image';
 
 const isAuthenticatedKey = 'is-authenticated';
 
@@ -35,12 +36,11 @@ export const handlers: any = [
   }),
 
   rest.get('/images', (req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.json({
-        title: 'Airline from Mock :-O',
-        src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg'
-      })
-    );
+    const images: Array<Image> = [];
+    for (let i = 0; i < 6; i++) {
+      images.push({ id: i, title: `Random_${i}`, src: `https://picsum.photos/30${i}` }); // Change size a little for different pictures
+    }
+
+    return res(ctx.status(200), ctx.json(images));
   })
 ];

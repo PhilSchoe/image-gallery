@@ -3,13 +3,26 @@ import ContentCard from './ContentCard.vue';
 import GenericDialog from './GenericDialog.vue';
 import ImageUpload from './ImageUpload.vue';
 
-const cards = [
-  { title: 'Pre-fab homes', src: 'https://cdn.vuetifyjs.com/images/cards/house.jpg' },
-  { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-  { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' },
-  { title: 'Favorite road trips', src: 'https://cdn.vuetifyjs.com/images/cards/road.jpg' },
-  { title: 'Best airlines', src: 'https://cdn.vuetifyjs.com/images/cards/plane.jpg' }
-];
+import { onMounted, ref } from 'vue';
+import { type Image } from '@/types/image';
+import axios, { type AxiosResponse } from 'axios';
+
+const cards = ref<Array<Image>>([]);
+
+onMounted(() => {
+  loadImages();
+});
+
+function loadImages() {
+  axios
+    .get<Array<Image>>('/images')
+    .then((response: AxiosResponse) => {
+      return response.data;
+    })
+    .then((images: Array<Image>) => {
+      cards.value = images;
+    });
+}
 </script>
 
 <template>
