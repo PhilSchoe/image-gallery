@@ -21,6 +21,10 @@ function loadImages() {
     })
     .then((images: Array<Image>) => {
       cards.value = images;
+    })
+    .catch((error: Error) => {
+      console.error(`Image loading failed: ${error.message}`);
+      // TODO: Show error to user
     });
 }
 </script>
