@@ -6,6 +6,9 @@ import App from './App.vue';
 import router from './router';
 
 import { worker } from './mocks/browser';
+import type { APIController } from './controller/apiController';
+import { APIControllerAxios } from './controller/apiControllerAxios';
+import { ImageController } from './controller/imageController';
 
 worker.start();
 
@@ -16,3 +19,8 @@ app.use(createPinia());
 app.use(router);
 
 app.mount('#app');
+
+// Init controller
+const apiController: APIController = new APIControllerAxios();
+
+ImageController.init(apiController);

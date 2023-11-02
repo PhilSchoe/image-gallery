@@ -5,7 +5,7 @@ import ImageUpload from './ImageUpload.vue';
 
 import { onMounted, ref } from 'vue';
 import { type Image } from '@/types/image';
-import axios, { type AxiosResponse } from 'axios';
+import { ImageController } from '@/controller/imageController';
 
 const cards = ref<Array<Image>>([]);
 
@@ -13,19 +13,13 @@ onMounted(() => {
   loadImages();
 });
 
-function loadImages() {
-  axios
-    .get<Array<Image>>('/images')
-    .then((response: AxiosResponse) => {
-      return response.data;
-    })
-    .then((images: Array<Image>) => {
-      cards.value = images;
-    })
-    .catch((error: Error) => {
-      console.error(`Image loading failed: ${error.message}`);
-      // TODO: Show error to user
-    });
+async function loadImages() {
+  try {
+    cards.value = await ImageController.getImages();
+  } catch (error) {
+    console.error(`Image loading failed: ${error}`);
+    // TODO: Show error to user
+  }
 }
 </script>
 
