@@ -3,24 +3,20 @@ import ContentCard from './ContentCard.vue';
 import GenericDialog from './GenericDialog.vue';
 import ImageUpload from './ImageUpload.vue';
 
-import { onMounted, ref } from 'vue';
-import { type Image } from '@/types/image';
-import { ImageController } from '@/controller/imageController';
+import { onMounted } from 'vue';
+import { useImageStore } from '@/stores/imageStore';
 
-const cards = ref<Array<Image>>([]);
+const imageStore = useImageStore();
 
-onMounted(() => {
-  loadImages();
-});
-
-async function loadImages() {
+onMounted(async () => {
+  // Think about suspense component
   try {
-    cards.value = await ImageController.getImages();
+    await imageStore.loadImages();
   } catch (error) {
     console.error(`Image loading failed: ${error}`);
     // TODO: Show error to user
   }
-}
+});
 </script>
 
 <template>
@@ -44,7 +40,7 @@ async function loadImages() {
     <v-main>
       <v-container fluid class="w-75">
         <v-row>
-          <v-col v-for="card in cards" :key="card.title" sm="6" md="6" lg="3">
+          <v-col v-for="card in imageStore.images" :key="card.title" sm="6" md="6" lg="3">
             <content-card :card-title="card.title" :card-image-src="card.src" />
           </v-col>
         </v-row>
