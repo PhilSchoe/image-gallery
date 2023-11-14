@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue';
+import { useImageStore } from '@/stores/imageStore';
 
-defineProps<{
+const props = defineProps<{
   closeDialogFunction: () => void;
 }>();
 
+const imageStore = useImageStore();
+
 const imageFile = ref<File[]>([]);
 let loading = false;
+
 const imagePreviewSrc = computed<string>(() => {
   loading = true;
   if (imageFile.value.length == 0) {
@@ -19,6 +23,16 @@ const imagePreviewSrc = computed<string>(() => {
   loading = false;
   return url;
 });
+
+function handleUpload() {
+  if (imageFile.value == null || imageFile.value.length == 0) {
+    return;
+  }
+
+  imageStore.addImage(imageFile.value[0]);
+
+  props.closeDialogFunction();
+}
 </script>
 
 <template>
@@ -41,7 +55,7 @@ const imagePreviewSrc = computed<string>(() => {
     <v-card-actions>
       <v-spacer />
       <v-btn @click="closeDialogFunction" variant="text">Close</v-btn>
-      <v-btn variant="text">Upload</v-btn>
+      <v-btn @click="handleUpload" variant="text">Upload</v-btn>
     </v-card-actions>
   </v-card>
 </template>

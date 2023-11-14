@@ -4,6 +4,7 @@ import { type Image } from '@/types/image';
 const isAuthenticatedKey = 'is-authenticated';
 
 const images: Array<Image> = [];
+const imageFiles: Map<string | number, FormDataEntryValue> = new Map();
 
 export const handlers: any = [
   http.post('/login', () => {
@@ -33,5 +34,31 @@ export const handlers: any = [
     }
 
     return HttpResponse.json(images, { status: 200 });
+  }),
+
+  http.post('/image', async ({ request }): Promise<HttpResponse> => {
+    const data = await request.formData();
+    const image = data.get('image');
+    if (image == null) {
+      return HttpResponse.json({ errorMessage: 'Image is null' }, { status: 400 });
+    }
+
+    const id = Math.floor(Math.random() * 100);
+    const outImage: Image = {
+      id: id,
+      title: `Upload_${id}`,
+      src: `/image/${id}`
+    };
+
+    images.push(outImage);
+    imageFiles.set(outImage.id, image);
+
+    return HttpResponse.json(outImage, { status: 200 });
+  }),
+
+  http.get('/image/:id', ({ params }) => {
+    const image = imageFiles.get(Number(params.id));
+
+    return new Response(image);
   })
 ];
