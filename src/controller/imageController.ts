@@ -19,8 +19,9 @@ export class ImageController {
     return images;
   }
 
-  public static async postImageFile(imageFile: File): Promise<Image> {
+  public static async postImage(title: string, imageFile: File): Promise<Image> {
     const formData = new FormData();
+    formData.append('title', title);
     formData.append('image', imageFile);
 
     const resultImage = await ImageController.apiController.post<FormData, Image>(

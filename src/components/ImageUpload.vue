@@ -8,6 +8,7 @@ const props = defineProps<{
 
 const imageStore = useImageStore();
 
+let title: string = '';
 const imageFile = ref<File[]>([]);
 let loading = false;
 
@@ -29,7 +30,7 @@ function handleUpload() {
     return;
   }
 
-  imageStore.addImage(imageFile.value[0]);
+  imageStore.addImage(title, imageFile.value[0]);
 
   props.closeDialogFunction();
 }
@@ -41,7 +42,11 @@ function handleUpload() {
       <h2>Upload Image</h2>
     </v-card-title>
     <v-card-text>
-      <v-text-field label="Image Title*" required></v-text-field>
+      <v-text-field
+        label="Image Title*"
+        @update:model-value="(newValue) => (title = newValue)"
+        required
+      ></v-text-field>
       <v-file-input
         label="Select Image"
         prepend-icon="mdi-camera"

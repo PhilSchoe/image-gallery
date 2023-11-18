@@ -16,8 +16,8 @@ export const useImageStore = defineStore('images', {
       this.images = await ImageController.getImages();
     },
 
-    async addImage(image: File): Promise<void> {
-      const resultImage: Image = await ImageController.postImageFile(image);
+    async addImage(title: string, image: File): Promise<void> {
+      const resultImage: Image = await ImageController.postImage(title, image);
       this.images.push(resultImage);
     }
   },

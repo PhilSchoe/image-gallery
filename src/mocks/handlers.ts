@@ -38,6 +38,12 @@ export const handlers: any = [
 
   http.post('/image', async ({ request }): Promise<HttpResponse> => {
     const data = await request.formData();
+
+    const title = data.get('title') as string;
+    if (title == null) {
+      return HttpResponse.json({ errorMessage: 'Title is null' }, { status: 400 });
+    }
+
     const image = data.get('image');
     if (image == null) {
       return HttpResponse.json({ errorMessage: 'Image is null' }, { status: 400 });
@@ -46,7 +52,7 @@ export const handlers: any = [
     const id = Math.floor(Math.random() * 100);
     const outImage: Image = {
       id: id,
-      title: `Upload_${id}`,
+      title: title,
       src: `/image/${id}`
     };
 
