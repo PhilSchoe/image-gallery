@@ -19,12 +19,6 @@ const props = defineProps<{
 
     <v-card-actions>
       <v-spacer></v-spacer>
-
-      <v-btn size="small" color="surface-variant" variant="text" icon="mdi-heart"></v-btn>
-
-      <v-btn size="small" color="surface-variant" variant="text" icon="mdi-bookmark"></v-btn>
-
-      <v-btn size="small" color="surface-variant" variant="text" icon="mdi-share-variant"></v-btn>
     </v-card-actions>
   </v-card>
 </template>
